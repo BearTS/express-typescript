@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   mongodb:
     image: mongo:5.0.2
@@ -7,10 +7,10 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
     volumes:
-      - ../mongoDB:/data/db
+      - ../prod_mongoDB:/data/db
     networks:
-      - default
-  
+      - app-network
+
   app:
     depends_on:
       - mongodb
@@ -18,26 +18,34 @@ services:
     ports:
       - 6530:6530
     env_file: ./.env
-    restart: unless-stopped
+    deploy:
+      replicas: 13
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 2
+        delay: 10s
     environment:
       - NODE_ENV=production
       - PORT=6530
       - MONGO_URL=mongodb://root:root@mongodb:27017/
-    stdin_open: true
-    tty: true
     networks:
-      - default
+      - app-network
 
   nginx:
-    image: bearts/express-nginx:latest
+    depends_on:
+      - app
+    image: bearts/express-nginx-prod:latest
     ports:
       - 80:80
       - 443:443
-    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
     networks:
-      - default    
+      - app-network
 
 networks:
-  default:
-    name: express-app
-    external: true
+  app-network:
+    driver: overlay

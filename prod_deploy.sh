@@ -34,7 +34,8 @@ echo -e '\e[1;32m Starting server \e[0m'
 
 cd nginx
 echo -e '\e[1;32m Building docker image for nginx \e[0m'
-docker build -t bearts/express-nginx .
+
+docker build -t bearts/express-nginx-prod . < Dockerfile.prod
 if [ $? -ne 0 ]; then
     echo -e '\e[1;31m Error: docker build failed for nginx \e[0m'
     exit 1
@@ -49,12 +50,11 @@ fi
 
 echo -e '\e[1;32m Getting containers up \e[0m'
 
-docker compose up -d
-if [ $? -ne 0 ]; then
+docker compose up -f docker-compose.prod.yml -d
+echo [ $? -ne 0 ]; then
     echo -e '\e[1;31m Error: docker compose up failed \e[0m'
     exit 1
 fi
 
 echo -e '\e[1;32m Server started \e[0m'
 exit 0
-

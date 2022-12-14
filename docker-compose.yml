@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:5.0.2
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - ../mongoDB:/data/db
+    networks:
+      - default
+  
+  app:
+    depends_on:
+      - mongodb
+    image: express-app:latest
+    ports:
+      - 6530:6530
+    env_file: ./.env
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=6530
+      - MONGO_URL=mongodb://root:root@mongodb:27017/
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
+  nginx:
+    image: express-nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    networks:
+      - default    
+
+networks:
+  default:
+    name: express-app
+    external: true

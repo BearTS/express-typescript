@@ -8,9 +8,9 @@ export type TokenDocument = mongoose.Document & {
 
 
 const RefreshTokenSchema: mongoose.Schema = new mongoose.Schema({
-    token: { type: String, required: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    expiryDate: { type: Date, required: true }
+  token: { type: String, required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  expiryDate: { type: Date, required: true }
 });
 
 const Token = mongoose.model<TokenDocument>("Token", RefreshTokenSchema);

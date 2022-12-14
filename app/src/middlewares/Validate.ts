@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Schema } from "joi";
 
 class Validate {
-  public static body = (schema: Schema, errors?: any) => {
+  public static body = (schema: Schema, errors?: string) => {
     return (req: Request, res: Response, next: NextFunction) => {
       const { error } = schema.validate(req.body);
       const valid = error == null;
@@ -18,7 +18,7 @@ class Validate {
       }
     };
   };
-  public static params = (schema: Schema, errors?: any) => {
+  public static params = (schema: Schema, errors?: string) => {
     return (req: Request, res: Response, next: NextFunction) => {
       const { error } = schema.validate(req.params);
       const valid = error == null;
@@ -34,7 +34,7 @@ class Validate {
       }
     };
   };
-  public static query = (schema: Schema, errors?: any) => {
+  public static query = (schema: Schema, errors?: string) => {
     return (req: Request, res: Response, next: NextFunction) => {
       const { error } = schema.validate(req.query);
       const valid = error == null;

@@ -50,11 +50,12 @@ fi
 
 echo -e '\e[1;32m Getting containers up \e[0m'
 
-docker compose up -f docker-compose.prod.yml -d
+docker compose up -f docker-compose.prod.yml up -d
 echo [ $? -ne 0 ]; then
     echo -e '\e[1;31m Error: docker compose up failed \e[0m'
     exit 1
 fi
+
 
 echo -e '\e[1;32m Server started \e[0m'
 exit 0

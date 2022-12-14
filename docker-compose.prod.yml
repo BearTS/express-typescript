@@ -49,3 +49,4 @@ services:
 networks:
   app-network:
     driver: overlay
+    attachable: true

@@ -20,4 +20,4 @@ COPY --from=builder /usr/src/dist/ /app/
 COPY package.json /app/
 
 RUN yarn install --production
-CMD ["yarn", "start"]
+CMD ["node", "index.js"]

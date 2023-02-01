@@ -4,10 +4,7 @@ import { v4 } from "uuid";
 import User, { IUserModel } from "../../models/user.model";
 import { sendEmail } from "../../services/sendEmail";
 class Register {
-  public static async signup(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
+  public static async signup(req: Request, res: Response): Promise<Response | void> {
     try {
       const { email, password } = req.body;
       const user: IUserModel = await User.findOne({ email });

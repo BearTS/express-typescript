@@ -10,6 +10,8 @@ specifiers:
   '@types/express-session': ^1.17.5
   '@types/hpp': ^0.2.2
   '@types/jsonwebtoken': ^8.5.9
+  '@types/morgan': ^1.9.4
+  '@types/node': ^16.11.2
   '@types/nodemailer': ^6.4.6
   '@types/passport': ^1.0.11
   '@types/passport-google-oauth20': ^2.0.11
@@ -36,6 +38,7 @@ specifiers:
   jsonwebtoken: ^8.5.1
   mongodb: ^4.10.0
   mongoose: ^6.6.1
+  morgan: ^1.10.0
   nodemailer: ^6.7.8
   passport: ^0.6.0
   passport-google-oauth20: ^2.0.0
@@ -63,6 +66,7 @@ dependencies:
   jsonwebtoken: 8.5.1
   mongodb: 4.10.0
   mongoose: 6.6.1
+  morgan: 1.10.0
   nodemailer: 6.7.8
   passport: 0.6.0
   passport-google-oauth20: 2.0.0
@@ -78,6 +82,8 @@ devDependencies:
   '@types/express-session': 1.17.5
   '@types/hpp': 0.2.2
   '@types/jsonwebtoken': 8.5.9
+  '@types/morgan': 1.9.4
+  '@types/node': 16.18.11
   '@types/nodemailer': 6.4.6
   '@types/passport': 1.0.11
   '@types/passport-google-oauth20': 2.0.11
@@ -268,6 +274,16 @@ packages:
 
   /@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
+    dev: true
+
+  /@types/morgan/1.9.4:
+    resolution: {integrity: sha512-cXoc4k+6+YAllH3ZHmx4hf7La1dzUk6keTR4bF4b4Sc0mZxU/zK4wO7l+ZzezXm/jkYj/qC+uYGZrarZdIVvyQ==}
+    dependencies:
+      '@types/node': 18.7.20
+    dev: true
+
+  /@types/node/16.18.11:
+    resolution: {integrity: sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==}
     dev: true
 
   /@types/node/18.7.20:
@@ -550,6 +566,13 @@ packages:
   /base64url/3.0.1:
     resolution: {integrity: sha512-ir1UPr3dkwexU7FdV8qBBbNDRUhMmIekYMFZfi+C/sLNnRESKPl23nB9b2pltqfOQNnGzsDdId90AEtG5tCx4A==}
     engines: {node: '>=6.0.0'}
+    dev: false
+
+  /basic-auth/2.0.1:
+    resolution: {integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==}
+    engines: {node: '>= 0.8'}
+    dependencies:
+      safe-buffer: 5.1.2
     dev: false
 
   /bcryptjs/2.4.3:
@@ -1626,6 +1649,19 @@ packages:
       - supports-color
     dev: false
 
+  /morgan/1.10.0:
+    resolution: {integrity: sha512-AbegBVI4sh6El+1gNwvD5YIck7nSA36weD7xvIxG4in80j/UoK8AEGaWnnz8v1GxonMCltmlNs5ZKbGvl9b1XQ==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      basic-auth: 2.0.1
+      debug: 2.6.9
+      depd: 2.0.0
+      on-finished: 2.3.0
+      on-headers: 1.0.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /mpath/0.9.0:
     resolution: {integrity: sha512-ikJRQTk8hw5DEoFVxHG1Gn9T/xcjtdnOKIU1JTmGjZZlg9LST2mBLmcX3/ICIbgJydT2GOc15RnNy5mHmzfSew==}
     engines: {node: '>=4.0.0'}
@@ -1680,6 +1716,13 @@ packages:
 
   /object-inspect/1.12.2:
     resolution: {integrity: sha512-z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==}
+    dev: false
+
+  /on-finished/2.3.0:
+    resolution: {integrity: sha512-ikqdkGAAyf/X/gPhXGvfgAytDZtDbr+bkNUJ0N9h5MI/dmdgCs3l6hoHrcUv41sRKew3jIwrp4qQDXiK99Utww==}
+    engines: {node: '>= 0.8'}
+    dependencies:
+      ee-first: 1.1.1
     dev: false
 
   /on-finished/2.4.1:

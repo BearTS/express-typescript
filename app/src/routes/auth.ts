@@ -1,10 +1,12 @@
 import { Router } from "express";
+import Joi from "joi";
+import Validate from "../middlewares/Validate";
 import Login from "../controllers/Auth/Login";
 import Register from "../controllers/Auth/Register";
-import Validate from "../middlewares/Validate";
-import Joi from "joi";
+
 const router = Router();
 
+// Joi validation schema
 const schema = {
   signup: Joi.object({
     name: Joi.string().required(),
@@ -18,12 +20,13 @@ const schema = {
   }),
 };
 
+// Routes for login 
 router.post("/auth/login", Validate.body(schema.login), Login.login);
 router.post("/auth/forgotPassword", Login.sendForgotPassword);
 router.post("/auth/resetPassword", Login.resetPassword);
 router.get('/auth/renewToken/:id', Login.renewToken);
 
-
+// Routes for register
 router.post("/auth/signup", Validate.body(schema.signup), Register.signup);
 router.get("/verify/:id/:hash", Register.verify);
 router.post("/auth/resendEmail", Register.resend);

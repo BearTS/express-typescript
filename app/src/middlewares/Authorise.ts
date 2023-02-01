@@ -6,7 +6,12 @@ interface IToken {
   id: string;
 }
 
-// export func
+/**
+ * @function authorise
+ * @type {Middleware}
+ * @description This middleware is used to authorise the user
+ * @returns Response of type express
+ */
 export const authorise = async (req: Request, res: Response, next: NextFunction) => {
   const jwtsecret = process.env.JWT_SECRET;
   let token: string = req.headers.authorization;

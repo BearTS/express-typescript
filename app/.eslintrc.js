@@ -3,11 +3,11 @@ module.exports = {
   extends: ['plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   env: {
     es6: true,
-    node: true,
+    node: true
   },
   rules: {
     'no-var': 'error',
@@ -16,6 +16,6 @@ module.exports = {
     'no-multi-spaces': 'error',
     'space-in-parens': 'error',
     'no-multiple-empty-lines': 'error',
-    'prefer-const': 'error',
-  },
+    'prefer-const': 'error'
+  }
 };

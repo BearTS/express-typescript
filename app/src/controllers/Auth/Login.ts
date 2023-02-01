@@ -3,11 +3,22 @@ import { v4 } from "uuid";
 import User, { IUserModel } from "../../models/user.model";
 import { sendEmail } from "../../services/sendEmail";
 import Log from "../../middlewares/Log";
+
+/**
+ * @class Login
+ * @description This class is used to login a user
+ * @exports Login
+ */
 class Login {
-  public static async login(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
+
+  /**
+   * @method login
+   * @description This method is used to login a user
+   * @param {Request} req: Request of type express
+   * @param {Response} res: Response of type express
+   * @returns Response of type express
+   */
+  public static async login(req: Request, res: Response): Promise<Response | void> {
     try {
       const { email, password } = req.body;
       const user: IUserModel = await User.findOne({ email });
@@ -31,10 +42,7 @@ class Login {
       return res.status(500).send("Internal server error");
     }
   }
-  public static async sendForgotPassword(
-    req: Request,
-    res: Response
-  ): Promise<Response | void> {
+  public static async sendForgotPassword(req: Request, res: Response): Promise<Response | void> {
     try {
       const { email } = req.body;
       const user: IUserModel = await User.findOne({ email });

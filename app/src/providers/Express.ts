@@ -1,38 +1,65 @@
+import dotenv from "dotenv";
 import express from "express";
+import http from "http";
 import Kernel from "../middlewares/Kernel";
 import Log from "../middlewares/Log";
 import Routes from "./Routes";
-import dotenv from "dotenv";
 
 dotenv.config();
-class Express{
-  public express: express.Application;
 
-  constructor(){
+/**
+ * @class Express
+ * @description This class is used to initialize the express server
+ */
+class Express {
+  public express: express.Application;
+  private server: http.Server;
+
+  /**
+   * @constructor
+   * @description This function is used to initialize the express server
+   * @returns void
+   */
+  constructor() {
     this.express = express();
+    this.createServer();
     this.mountMiddlewares();
     this.mountRoutes();
   }
-  private mountRoutes(): void{
-    this.express = Routes.mount(this.express);
-  }
-  private mountMiddlewares(): void{
-    this.express = Kernel.init(this.express);
-    this.express.use(express.json());
-    this.express.use(express.urlencoded({ extended: false }));
-  }
 
+  /**
+   * @method init
+   * @description This function is used to initialize the express server
+   * @returns void
+   */
   public init(): void {
     const port = process.env.PORT || 3000;
+
+    // for 404 handler  
     this.express.use((req, res) => {
-      res.status(404).send('Not found');
+      res.status(404).json({
+        status: 404,
+        message: "Not Found",
+      });
     });
-    this.express.listen(port, () => {
-      return console.log('\x1b[33m%s\x1b[0m', `Server :: Running on port: ${port}'`);
-    }).on("error", (_error) => {
-      return Log.error('Error: ' + _error.message);
-    });
+
+    this.server.listen(port, () => {
+      Log.info(`Server :: Running on port ${port}`);
+    });  
   }
+
+  private mountRoutes(): void {
+    this.express = Routes.mount(this.express);
+  }
+
+  private mountMiddlewares(): void {
+    this.express = Kernel.init(this.express);
+  }
+
+  private createServer(): void {
+    this.server = http.createServer(this.express);
+  }
+
 }
 
-export default new Express;
+export default new Express();

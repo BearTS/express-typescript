@@ -1,10 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-
-
-interface IToken {
-  id: string;
-}
+import IToken from "../interfaces/token";
 
 /**
  * @function authorise

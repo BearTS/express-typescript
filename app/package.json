@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/BearTS/express-typescript#readme",
   "dependencies": {
-    "@types/express-mongo-sanitize": "^2.1.0",
     "bcryptjs": "^2.4.3",
     "chalk": "^5.0.1",
     "compression": "^1.7.4",

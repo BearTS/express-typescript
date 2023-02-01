@@ -2,6 +2,7 @@ import Express from "./Express";
 import { Database } from "./Database";
 import Log from "../middlewares/Log";
 import dotenv from "dotenv";
+import Redis from "./Cache";
 
 
 dotenv.config();
@@ -28,10 +29,18 @@ class App {
    * @returns void
    */
   public loadDatabase(): void {
-
     Log.info('Database :: Loading...');
-
     Database.init();
+  }
+
+  /**
+   * @method loadCache
+   * @description This function is used to load the cache
+   * @returns void
+   */
+  public loadCache(): void {
+    Log.info('Cache :: Loading...');
+    Redis.connect();
   }
 }
 

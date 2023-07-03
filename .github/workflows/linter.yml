@@ -16,10 +16,10 @@ name: Lint Code Base
 #############################
 on:
   push:
-    branches: [master]
-    # Remove the line above to run when pushing to master
+    branches: [main]
+    # Remove the line above to run when pushing to main
   pull_request:
-    branches: [master]
+    branches: [main]
 
 ###############
 # Set the Job #
@@ -52,7 +52,7 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_MARKDOWN: false
-          DEFAULT_BRANCH: master
+          DEFAULT_BRANCH: main
           VALIDATE_DOCKERFILE: false
           VALIDATE_DOCKERFILE_HADOLINT: false
           VALIDATE_PYTHON_FLAKE8: false

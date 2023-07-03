@@ -4,7 +4,6 @@ import Log from "../middlewares/Log";
 import dotenv from "dotenv";
 import Redis from "./Cache";
 
-
 dotenv.config();
 
 /**
@@ -40,7 +39,7 @@ class App {
    */
   public loadCache(): void {
     Log.info('Cache :: Loading...');
-    Redis.connect();
+    Redis.init();
   }
 }
 

@@ -11,11 +11,11 @@ export default class Redis {
   private static client: RedisClient;
 
   /**
-   * @method connect
-   * @description This function is used to connect to the Redis database
+   * @method init
+   * @description This function is used to init the connection to the Redis database
    * @returns void
    */
-  public static async connect(): Promise<void> {
+  public static async init(): Promise<void> {
     try {
       this.client = redis.createClient({
         url: process.env.REDIS_URI,

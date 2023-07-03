@@ -5,6 +5,9 @@ import Redis from "./Cache";
 import IToken from "../interfaces/token";
 import Log from "../middlewares/Log";
 
+// Sample code for socket.io
+// Kindly change to your business logic
+
 /**
  * @class SocketIOService
  * @description This class is used to initialize the socket.io server
@@ -89,19 +92,5 @@ export default class SocketIOService {
     const userSocket = await Redis.get(this.defaultDatabase, userId);
     this.userIo.to(userSocket).emit(event, data);
     Log.info("Emitting to user");
-  }
-
-  /**
-   * @method emitToRunner
-   * @description This function is used to emit an event to a runner
-   * @param {string} userId
-   * @param {string} event
-   * @param {any} data
-   * @returns void
-  */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public static async emitToRunner(userId: string, event: string, data: any): Promise<void> {
-    const runnerSocket = await Redis.get(this.defaultDatabase, userId);
-    this.runnerIo.to(runnerSocket).emit(event, data);
   }
 }

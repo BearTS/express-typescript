@@ -7,17 +7,17 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
     volumes:
-      - ../mongoDB:/data/db
+      - ./data/db:/data/db
     networks:
       - default
   
   app:
     depends_on:
       - mongodb
-    image: bearts/express-app:latest
-    ports:
-      - 6530:6530
-    env_file: ./.env
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    env_file: ./app/.env
     restart: unless-stopped
     environment:
       - NODE_ENV=production
@@ -29,7 +29,9 @@ services:
       - default
 
   nginx:
-    image: bearts/express-nginx:latest
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     ports:
       - 80:80
       - 443:443

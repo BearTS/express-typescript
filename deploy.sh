@@ -32,20 +32,8 @@ fi
 
 echo -e '\e[1;32m Starting server \e[0m'
 
-cd nginx
-echo -e '\e[1;32m Building docker image for nginx \e[0m'
-docker build -t bearts/express-nginx .
-if [ $? -ne 0 ]; then
-    echo -e '\e[1;31m Error: docker build failed for nginx \e[0m'
-    exit 1
-fi
-
-cd ../app
-docker build -t bearts/express-app .
-if [ $? -ne 0 ]; then
-    echo -e '\e[1;31m Error: docker build failed for app \e[0m'
-    exit 1
-fi
+echo -e '\e[1;32m Building docker images \e[0m'
+docker compose build
 
 echo -e '\e[1;32m Getting containers up \e[0m'
 
